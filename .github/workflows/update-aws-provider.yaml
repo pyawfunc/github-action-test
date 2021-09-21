@@ -13,3 +13,16 @@ jobs:
 
       - name: create branch develop/update-aws-provider
         run: git checkout -b develop/update-aws-provider main
+
+      - name: install tfupdate
+        env:
+          TFUPDATE_VERSION: '0.6.1'
+        run: |
+          wget -P /tmp https://github.com/minamijoyo/tfupdate/releases/download/v${TFUPDATE_VERSION}/tfupdate_${TFUPDATE_VERSION}_linux_amd64.tar.gz
+          tar xvf /tmp/tfupdate_${TFUPDATE_VERSION}_linux_amd64.tar.gz -C /tmp
+          sudo mv /tmp/tfupdate /usr/local/bin
+          sudo chmod +x /usr/local/bin/tfupdate
+          tfupdate --version
+
+
+      
