@@ -5,6 +5,8 @@ jobs:
   update-aws-provider:
     name: Update aws provider
     runs-on: ubuntu-latest
+    env:
+      TFUPDATE_VERSION: '0.6.1'
     steps:
       - name: checkout main
         uses: actions/checkout@v2
@@ -15,14 +17,22 @@ jobs:
         run: git checkout -b develop/update-aws-provider main
 
       - name: install tfupdate
-        env:
-          TFUPDATE_VERSION: '0.6.1'
+        
         run: |
           wget -P /tmp https://github.com/minamijoyo/tfupdate/releases/download/v${TFUPDATE_VERSION}/tfupdate_${TFUPDATE_VERSION}_linux_amd64.tar.gz
           tar xvf /tmp/tfupdate_${TFUPDATE_VERSION}_linux_amd64.tar.gz -C /tmp
           sudo mv /tmp/tfupdate /usr/local/bin
           sudo chmod +x /usr/local/bin/tfupdate
           tfupdate --version
+        
+      - name: update aws provider version
+        run: tfupdate provider aws -r .
+
+      - name: git add & commit & push
+        run: |
+          git add .
+          git commit -m "Update aws provider to ${TFUPDATE_VERSION}"
+          git push
 
 
       
