@@ -37,6 +37,4 @@ jobs:
           git add .
           git commit -m "Update aws provider to ${LATEST_PROVIDER_VERSION}"
           git push --set-upstream origin ${BRANCH_NAME}
-
-
-      
+          
