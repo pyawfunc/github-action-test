@@ -7,5 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create branch develop/update-aws-provider
-        run: git checkout -b develop/update-aws-provider master
-        
+        run: git checkout -b develop/update-aws-provider main
