@@ -7,17 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TFUPDATE_VERSION: '0.6.1'
+      BRANCH_NAME: 'develop/update-aws-provider'
     steps:
       - name: checkout main
         uses: actions/checkout@v2
         with:
           ref: main
 
-      - name: create branch develop/update-aws-provider
-        run: git checkout -b develop/update-aws-provider main
+      - name: create branch
+        run: git checkout -b ${BRANCH_NAME} main
 
       - name: install tfupdate
-        
         run: |
           wget -P /tmp https://github.com/minamijoyo/tfupdate/releases/download/v${TFUPDATE_VERSION}/tfupdate_${TFUPDATE_VERSION}_linux_amd64.tar.gz
           tar xvf /tmp/tfupdate_${TFUPDATE_VERSION}_linux_amd64.tar.gz -C /tmp
@@ -34,7 +34,7 @@ jobs:
           git config --global user.name "pyawfunc"
           git add .
           git commit -m "Update aws provider to ${TFUPDATE_VERSION}"
-          git push
+          git push --set-upstream origin ${BRANCH_NAME}
 
 
       
