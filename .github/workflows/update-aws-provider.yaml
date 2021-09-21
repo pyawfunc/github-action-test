@@ -30,6 +30,8 @@ jobs:
 
       - name: git add & commit & push
         run: |
+          git config --global user.email "42330850+pyawfunc@users.noreply.github.com"
+          git config --global user.name "pyawfunc"
           git add .
           git commit -m "Update aws provider to ${TFUPDATE_VERSION}"
           git push
