@@ -45,9 +45,12 @@ jobs:
         run: git commit -m "Update aws provider to ${LATEST_PROVIDER_VERSION}"
 
       - name: git push
+        id: git-push
         run: git push --set-upstream origin ${BRANCH_NAME}  
+        continue-on-error: true
       
       - name: create pull request
+        if: steps.git-push.outputs.status == 200
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "main"
