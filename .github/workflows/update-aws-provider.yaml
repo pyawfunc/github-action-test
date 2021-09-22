@@ -24,6 +24,9 @@ jobs:
           sudo mv /tmp/tfupdate /usr/local/bin
           sudo chmod +x /usr/local/bin/tfupdate
           tfupdate --version
+      
+      - name: set LATEST_PROVIDER_VERSION
+        run: |
           LATEST_PROVIDER_VERSION=`tfupdate release latest -s tfregistryProvider hashicorp/aws`
           echo "LATEST_PROVIDER_VERSION=${LATEST_PROVIDER_VERSION}" >> $GITHUB_ENV
         
@@ -37,3 +40,11 @@ jobs:
           git add .
           git commit -m "Update aws provider to ${LATEST_PROVIDER_VERSION}"
           git push --set-upstream origin ${BRANCH_NAME}
+      
+      - name: create pull request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "main"
+          source_branch: "${BRANCH_NAME}"
+          pr_title: Update aws provider to ${LATEST_PROVIDER_VERSION}
+          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
