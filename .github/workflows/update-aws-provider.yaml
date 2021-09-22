@@ -45,7 +45,7 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "main"
-          source_branch: ${{ BRANCH_NAME }}
+          source_branch: ${BRANCH_NAME}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: Update aws provider to ${LATEST_PROVIDER_VERSION}
           pr_body: |
