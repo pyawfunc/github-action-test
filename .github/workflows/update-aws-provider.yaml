@@ -42,10 +42,13 @@ jobs:
         run: git add .
 
       - name: git commit
+        id: git-commit
         run: git commit -m "Update aws provider to ${LATEST_PROVIDER_VERSION}"
+        continue-on-error: true
 
       - name: git push
         id: git-push
+        if: steps.git-commit.outputs.status == 200
         run: git push --set-upstream origin ${BRANCH_NAME}  
         continue-on-error: true
       
