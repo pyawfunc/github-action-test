@@ -45,7 +45,7 @@ jobs:
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "main"
-          source_branch: ${BRANCH_NAME}
+          source_branch: "develop/update-aws-provider"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: Update aws provider to ${LATEST_PROVIDER_VERSION}
           pr_body: |
@@ -63,4 +63,4 @@ jobs:
             aws providerをバージョンアップします。
             
             ## 概要
-            aws providerのバージョンを上げます。
+            aws providerのバージョンを${LATEST_PROVIDER_VERSION}に上げます。
