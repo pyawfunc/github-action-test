@@ -46,7 +46,21 @@ jobs:
         with:
           destination_branch: "main"
           source_branch: "develop/update-aws-provider"
-          pr_title: Update aws provider to ${LATEST_PROVIDER_VERSION}
-          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: Update aws provider to ${LATEST_PROVIDER_VERSION}
+          pr_body: |
+            ## 優先度
+            プルリクエストの優先度を一つ選択してください。
 
+            - [] 高
+              - 急を要する場合に選択してください。
+            - [x] 中
+              - 業務に必要な作業の場合に選択してください。
+            - [] 低
+              - 高でも中でもない場合に選択してください。
+
+            ## 前提
+            aws providerをバージョンアップします。
+            
+            ## 概要
+            aws providerのバージョンを上げます。
