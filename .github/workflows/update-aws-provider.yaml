@@ -73,3 +73,4 @@ jobs:
             
             ## 概要
             aws providerのバージョンを${LATEST_PROVIDER_VERSION}に上げます。
+
